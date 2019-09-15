@@ -34,7 +34,7 @@ class Top extends Component {
           centerComponent={<Title />}
         />
         <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff', flex: 1}}>
-          <Row data={topData.result} style={styles.head} textStyle={styles.headText}/>
+          <Row data={topData.result} style={styles.head} textStyle={styles.headText} {...props}/>
           <Row data={topData.tableData[0]} style={styles.row} textStyle={styles.cellText} {...props}/>
           <Row data={topData.tableData[1]} style={styles.row} textStyle={styles.cellText} {...props}/>
           <Row data={topData.tableData[2]} style={styles.row} textStyle={styles.cellText} {...props}/>
@@ -166,7 +166,7 @@ class Cell extends Component {
   };
 
   render() {
-    const { data, width, height, flex, style, textStyle, borderStyle, pushButton, ...props } = this.props;
+    const { data, width, height, flex, style, textStyle, borderStyle, pushButton, topData, ...props } = this.props;
     const borderTopWidth = (borderStyle && borderStyle.borderWidth) || 0;
     const borderRightWidth = borderTopWidth;
     const borderColor = (borderStyle && borderStyle.borderColor) || '#000';
@@ -187,7 +187,7 @@ class Cell extends Component {
           !width && !flex && !height && !style && { flex: 1 },
           style
         ]}
-        onPress={() => pushButton(data)}
+        onPress={() => pushButton(data, topData.result)}
       >
         <Text style={[textStyle, styles.text]} {...props}>
           {data}
